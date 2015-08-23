@@ -16,6 +16,7 @@ public partial class MainWindow: Gtk.Window
         var cellRendererText = new CellRendererText();
         lexColumn.PackStart(cellRendererText, true);
         lexColumn.AddAttribute(cellRendererText, "text", 0);
+        lexColumn.Title = "Con Word";
         wordList.AppendColumn(lexColumn);
         wordList.Model = wordStore;
     }
@@ -41,7 +42,6 @@ public partial class MainWindow: Gtk.Window
     protected void OnWordListCursorChanged(object sender, EventArgs e)
     {
         // This one fires when a person clicks a row
-        //throw new NotImplementedException();
         TreeIter iter;
         if (wordList.Selection.GetSelected(out iter))
         {

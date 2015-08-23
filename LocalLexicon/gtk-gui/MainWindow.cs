@@ -81,7 +81,9 @@ public partial class MainWindow
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.search = null;
+		this.search = new global::LocalLexicon.SearchWidget ();
+		this.search.Events = ((global::Gdk.EventMask)(256));
+		this.search.Name = "search";
 		this.vbox1.Add (this.search);
 		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.search]));
 		w3.Position = 1;
@@ -105,7 +107,9 @@ public partial class MainWindow
 		global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow1]));
 		w5.Resize = false;
 		// Container child hpaned1.Gtk.Paned+PanedChild
-		this.currentWord = null;
+		this.currentWord = new global::LocalLexicon.WordWidget ();
+		this.currentWord.Events = ((global::Gdk.EventMask)(256));
+		this.currentWord.Name = "currentWord";
 		this.hpaned1.Add (this.currentWord);
 		this.vbox1.Add (this.hpaned1);
 		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hpaned1]));
