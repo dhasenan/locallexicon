@@ -7,7 +7,7 @@ public partial class MainWindow
 	
 	private global::Gtk.Action FileAction;
 	
-	private global::Gtk.Action newAction;
+	private global::Gtk.Action NewLanguageAction;
 	
 	private global::Gtk.Action openAction;
 	
@@ -41,12 +41,12 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.UIManager = new global::Gtk.UIManager ();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup ("Default");
-		this.FileAction = new global::Gtk.Action ("FileAction", global::Mono.Unix.Catalog.GetString ("File"), null, null);
+		this.FileAction = new global::Gtk.Action ("FileAction", global::Mono.Unix.Catalog.GetString ("_File"), null, null);
 		this.FileAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("File");
 		w1.Add (this.FileAction, null);
-		this.newAction = new global::Gtk.Action ("newAction", global::Mono.Unix.Catalog.GetString ("New"), null, "gtk-new");
-		this.newAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("New");
-		w1.Add (this.newAction, null);
+		this.NewLanguageAction = new global::Gtk.Action ("NewLanguageAction", global::Mono.Unix.Catalog.GetString ("New Language"), null, null);
+		this.NewLanguageAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("New Language");
+		w1.Add (this.NewLanguageAction, null);
 		this.openAction = new global::Gtk.Action ("openAction", global::Mono.Unix.Catalog.GetString ("Open"), null, "gtk-open");
 		this.openAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open");
 		w1.Add (this.openAction, null);
@@ -55,24 +55,24 @@ public partial class MainWindow
 		w1.Add (this.saveAction, null);
 		this.NewWordAction = new global::Gtk.Action ("NewWordAction", global::Mono.Unix.Catalog.GetString ("New word"), null, null);
 		this.NewWordAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("New word");
-		w1.Add (this.NewWordAction, null);
+		w1.Add (this.NewWordAction, "<Primary><Mod2>n");
 		this.DeleteWordAction = new global::Gtk.Action ("DeleteWordAction", global::Mono.Unix.Catalog.GetString ("Delete word"), null, null);
 		this.DeleteWordAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Delete word");
-		w1.Add (this.DeleteWordAction, null);
+		w1.Add (this.DeleteWordAction, "<Primary><Mod2>d");
 		this.LanguagePropertiesAction = new global::Gtk.Action ("LanguagePropertiesAction", global::Mono.Unix.Catalog.GetString ("Language properties"), null, null);
 		this.LanguagePropertiesAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Language properties");
-		w1.Add (this.LanguagePropertiesAction, null);
+		w1.Add (this.LanguagePropertiesAction, "<Primary><Mod2>p");
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
+		this.Title = global::Mono.Unix.Catalog.GetString ("Lex 2: Electric Boogaloo");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox ();
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='FileAction' action='FileAction'><menuitem name='newAction' action='newAction'/><menuitem name='openAction' action='openAction'/><menuitem name='saveAction' action='saveAction'/><menuitem name='NewWordAction' action='NewWordAction'/><menuitem name='DeleteWordAction' action='DeleteWordAction'/><menuitem name='LanguagePropertiesAction' action='LanguagePropertiesAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='FileAction' action='FileAction'><menuitem name='NewLanguageAction' action='NewLanguageAction'/><menuitem name='openAction' action='openAction'/><menuitem name='saveAction' action='saveAction'/><menuitem name='NewWordAction' action='NewWordAction'/><menuitem name='DeleteWordAction' action='DeleteWordAction'/><menuitem name='LanguagePropertiesAction' action='LanguagePropertiesAction'/></menu></menubar></ui>");
 		this.menubar1 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar1")));
 		this.menubar1.Name = "menubar1";
 		this.vbox1.Add (this.menubar1);
@@ -131,7 +131,7 @@ public partial class MainWindow
 		this.DefaultHeight = 738;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
-		this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
+		this.NewLanguageAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
 		this.openAction.Activated += new global::System.EventHandler (this.OnOpenActionActivated);
 		this.saveAction.Activated += new global::System.EventHandler (this.OnSaveActionActivated);
 		this.NewWordAction.Activated += new global::System.EventHandler (this.OnNewWordActionActivated);

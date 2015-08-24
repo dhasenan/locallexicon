@@ -51,6 +51,7 @@ namespace LocalLexicon
                 this.glossEntry.IsEditable = true;
                 this.lexEntry.Text = word.Lex;
                 this.lexEntry.IsEditable = true;
+                this.lexEntry.GrabFocus();
             }
             _word = word;
         }

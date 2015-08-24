@@ -12,14 +12,13 @@
     <action-group name="Default">
       <action id="FileAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">File</property>
+        <property name="Label" translatable="yes">_File</property>
         <property name="ShortLabel" translatable="yes">File</property>
       </action>
-      <action id="newAction">
+      <action id="NewLanguageAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">New</property>
-        <property name="ShortLabel" translatable="yes">New</property>
-        <property name="StockId">gtk-new</property>
+        <property name="Label" translatable="yes">New Language</property>
+        <property name="ShortLabel" translatable="yes">New Language</property>
         <signal name="Activated" handler="OnNewActionActivated" />
       </action>
       <action id="openAction">
@@ -38,25 +37,28 @@
       </action>
       <action id="NewWordAction">
         <property name="Type">Action</property>
+        <property name="Accelerator">&lt;Primary&gt;&lt;Mod2&gt;n</property>
         <property name="Label" translatable="yes">New word</property>
         <property name="ShortLabel" translatable="yes">New word</property>
         <signal name="Activated" handler="OnNewWordActionActivated" />
       </action>
       <action id="DeleteWordAction">
         <property name="Type">Action</property>
+        <property name="Accelerator">&lt;Primary&gt;&lt;Mod2&gt;d</property>
         <property name="Label" translatable="yes">Delete word</property>
         <property name="ShortLabel" translatable="yes">Delete word</property>
         <signal name="Activated" handler="OnDeleteWordActionActivated" />
       </action>
       <action id="LanguagePropertiesAction">
         <property name="Type">Action</property>
+        <property name="Accelerator">&lt;Primary&gt;&lt;Mod2&gt;p</property>
         <property name="Label" translatable="yes">Language properties</property>
         <property name="ShortLabel" translatable="yes">Language properties</property>
         <signal name="Activated" handler="OnLanguagePropertiesActionActivated" />
       </action>
     </action-group>
     <property name="MemberName" />
-    <property name="Title" translatable="yes">MainWindow</property>
+    <property name="Title" translatable="yes">Lex 2: Electric Boogaloo</property>
     <property name="WindowPosition">CenterOnParent</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
@@ -68,7 +70,7 @@
             <property name="MemberName" />
             <node name="__gtksharp_153_Stetic_Editor_ActionMenuBar" type="Menubar">
               <node type="Menu" action="FileAction">
-                <node type="Menuitem" action="newAction" />
+                <node type="Menuitem" action="NewLanguageAction" />
                 <node type="Menuitem" action="openAction" />
                 <node type="Menuitem" action="saveAction" />
                 <node type="Menuitem" action="NewWordAction" />
@@ -262,7 +264,9 @@
         <child>
           <widget class="Gtk.Label" id="label1">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Lexeme</property>
+            <property name="LabelProp" translatable="yes">_Lexeme</property>
+            <property name="UseUnderline">True</property>
+            <property name="MnemonicWidget">lexEntry</property>
           </widget>
           <packing>
             <property name="AutoSize">True</property>
@@ -279,7 +283,9 @@
         <child>
           <widget class="Gtk.Label" id="label2">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Gloss</property>
+            <property name="LabelProp" translatable="yes">_Gloss</property>
+            <property name="UseUnderline">True</property>
+            <property name="MnemonicWidget">glossEntry</property>
           </widget>
           <packing>
             <property name="TopAttach">1</property>
@@ -298,7 +304,8 @@
         <child>
           <widget class="Gtk.Label" id="label3">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Definition</property>
+            <property name="LabelProp" translatable="yes">_Definition</property>
+            <property name="UseUnderline">True</property>
           </widget>
           <packing>
             <property name="TopAttach">2</property>

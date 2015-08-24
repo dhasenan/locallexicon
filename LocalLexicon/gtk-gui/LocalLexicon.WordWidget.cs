@@ -63,7 +63,8 @@ namespace LocalLexicon
 			// Container child table1.Gtk.Table+TableChild
 			this.label1 = new global::Gtk.Label ();
 			this.label1.Name = "label1";
-			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Lexeme");
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("_Lexeme");
+			this.label1.UseUnderline = true;
 			this.table1.Add (this.label1);
 			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1 [this.label1]));
 			w4.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -71,7 +72,8 @@ namespace LocalLexicon
 			// Container child table1.Gtk.Table+TableChild
 			this.label2 = new global::Gtk.Label ();
 			this.label2.Name = "label2";
-			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Gloss");
+			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("_Gloss");
+			this.label2.UseUnderline = true;
 			this.table1.Add (this.label2);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.label2]));
 			w5.TopAttach = ((uint)(1));
@@ -81,7 +83,8 @@ namespace LocalLexicon
 			// Container child table1.Gtk.Table+TableChild
 			this.label3 = new global::Gtk.Label ();
 			this.label3.Name = "label3";
-			this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("Definition");
+			this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("_Definition");
+			this.label3.UseUnderline = true;
 			this.table1.Add (this.label3);
 			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1 [this.label3]));
 			w6.TopAttach = ((uint)(2));
@@ -104,6 +107,8 @@ namespace LocalLexicon
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
+			this.label1.MnemonicWidget = this.lexEntry;
+			this.label2.MnemonicWidget = this.glossEntry;
 			this.Hide ();
 			this.lexEntry.Changed += new global::System.EventHandler (this.OnLexEntryChanged);
 			this.lexEntry.FocusOutEvent += new global::Gtk.FocusOutEventHandler (this.OnLexEntryFocusOutEvent);

@@ -23,10 +23,35 @@ public partial class MainWindow: Gtk.Window
         wordList.Model = wordStore;
         statusbar1.Push(0, "No language loaded");
         currentWord.WordChanged += OnCurrentWordChanged;
+
+        langFileFilter = new FileFilter();
+        langFileFilter.AddPattern("*.lang");
     }
 
     Language _lang;
     bool _dirty;
+
+    FileFilter langFileFilter;
+
+    void OpenLang(string filename)
+    {
+        try
+        {
+            var text = File.ReadAllText(filename);
+            var lang = JsonConvert.DeserializeObject<Language>(text);
+            lang.Filename = filename;
+            ShowLang(lang);
+        }
+        catch (FileNotFoundException ex)
+        {
+            statusbar1.Push(0, "File not found: " + filename);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("failed to open language file {0}: {1}", filename, ex);
+            statusbar1.Push(0, "Failed to open language file " + filename);
+        }
+    }
 
     public void ShowLang(Language lang)
     {
@@ -59,9 +84,11 @@ public partial class MainWindow: Gtk.Window
         if (string.IsNullOrWhiteSpace(_lang.Filename))
         {
             var sf = new FileChooserDialog("Save As", this, FileChooserAction.Save);
+            sf.AddFilter(langFileFilter);
             sf.AddButton("Save", ResponseType.Accept);
             sf.AddButton("Cancel", ResponseType.Cancel);
-            sf.Response += (o, args) => {
+            sf.Response += (o, args) =>
+            {
                 switch (args.ResponseId)
                 {
                     case ResponseType.Yes:
@@ -74,6 +101,7 @@ public partial class MainWindow: Gtk.Window
                     default:
                         break;
                 }
+                sf.Destroy();
             };
             sf.Show();
         }
@@ -110,10 +138,14 @@ public partial class MainWindow: Gtk.Window
     void PromptToSave(System.Action after)
     {
         var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Warning, ButtonsType.YesNo, "You have unsaved changes. Save first?");
-        md.Response += (o, args) => {
-            if (args.ResponseId == ResponseType.Yes) {
+        md.Response += (o, args) =>
+        {
+            if (args.ResponseId == ResponseType.Yes)
+            {
                 Save(after);
-            } else if (after != null) {
+            }
+            else if (after != null)
+            {
                 after();
             }
         };
@@ -152,7 +184,8 @@ public partial class MainWindow: Gtk.Window
         }
     }
 
-    private void SaveIfDirtyThen(System.Action after) {
+    private void SaveIfDirtyThen(System.Action after)
+    {
         if (_dirty)
         {
             PromptToSave(after);
@@ -170,7 +203,23 @@ public partial class MainWindow: Gtk.Window
 
     protected void OnOpenActionActivated(object sender, EventArgs e)
     {
-        SaveIfDirtyThen(() => ShowLang(new Language()));
+        SaveIfDirtyThen(() =>
+            {
+                var fd = new FileChooserDialog("Open language", this, FileChooserAction.Open);
+                fd.AddButton("Open", ResponseType.Accept);
+                fd.AddButton("Cancel", ResponseType.Cancel);
+                fd.AddFilter(langFileFilter);
+                fd.Response += (o, args) =>
+                {
+                    var filename = fd.Filename;
+                    fd.Destroy();
+                    if (args.ResponseId == ResponseType.Accept)
+                    {
+                        OpenLang(filename);
+                    }
+                };
+                fd.Show();
+            });
     }
 
     protected void OnSaveActionActivated(object sender, EventArgs e)
