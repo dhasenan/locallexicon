@@ -107,6 +107,7 @@ namespace LocalLexicon
 			this.Hide ();
 			this.lexEntry.Changed += new global::System.EventHandler (this.OnLexEntryChanged);
 			this.lexEntry.FocusOutEvent += new global::Gtk.FocusOutEventHandler (this.OnLexEntryFocusOutEvent);
+			this.lexEntry.FocusInEvent += new global::Gtk.FocusInEventHandler (this.OnLexEntryFocusInEvent);
 			this.definitionText.FocusOutEvent += new global::Gtk.FocusOutEventHandler (this.OnDefinitionTextFocusOutEvent);
 			this.glossEntry.Changed += new global::System.EventHandler (this.OnGlossEntryChanged);
 		}

@@ -322,6 +322,7 @@
             <property name="InvisibleChar">•</property>
             <signal name="Changed" handler="OnLexEntryChanged" />
             <signal name="FocusOutEvent" handler="OnLexEntryFocusOutEvent" />
+            <signal name="FocusInEvent" handler="OnLexEntryFocusInEvent" />
           </widget>
           <packing>
             <property name="LeftAttach">1</property>

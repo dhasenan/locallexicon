@@ -7,10 +7,10 @@ namespace LocalLexicon
     [JsonObject(MemberSerialization.Fields)]
     public class Language
     {
-        public string Name;
-        public string AlphabetOrder;
-        public string Notes;
-        public IList<Word> Words = new List<Word>();
+        public string Name = "";
+        public string AlphabetOrder = "";
+        public string Notes = "";
+        public readonly List<Word> Words = new List<Word>();
 
         /// <summary>
         /// The filename is set when we read the language from disk.

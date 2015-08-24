@@ -16,6 +16,8 @@ namespace LocalLexicon
 
         public event Action<Word, bool> WordChanged;
 
+        string _lexOnEntry;
+
         private void FireWordChanged(bool sortMaybeChanged)
         {
             if (_word == null)
@@ -99,10 +101,17 @@ namespace LocalLexicon
             {
                 return;
             }
-            if (lexEntry.Text != _word.Lex)
+            if (_word.Lex != _lexOnEntry)
             {
-                _word.Lex = lexEntry.Text;
                 FireWordChanged(true);
+            }
+        }
+
+        protected void OnLexEntryFocusInEvent(object o, Gtk.FocusInEventArgs args)
+        {
+            if (_word != null)
+            {
+                _lexOnEntry = _word.Lex;
             }
         }
     }
