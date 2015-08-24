@@ -20,7 +20,10 @@ public partial class MainWindow: Gtk.Window
         lexColumn.AddAttribute(cellRendererText, "text", 0);
         lexColumn.Title = "Con Word";
         wordList.AppendColumn(lexColumn);
-        wordList.Model = wordStore;
+        wordListFilter = new TreeModelFilter(wordStore, null);
+        wordListFilter.VisibleFunc = SearchFilter;
+        wordList.Model = wordListFilter;
+
         statusbar1.Push(0, "No language loaded");
         currentWord.WordChanged += OnCurrentWordChanged;
 
@@ -28,10 +31,56 @@ public partial class MainWindow: Gtk.Window
         langFileFilter.AddPattern("*.lang");
     }
 
+    void NotesWindowDirty (bool sortOrderChanged)
+    {
+        if (_lang != null)
+        {
+            statusbar1.Push(0, "Modified");
+            if (sortOrderChanged)
+            {
+                ShowSortedWords(_lang);
+            }
+        }
+    }
+
+    TreeModelFilter wordListFilter;
+    FileFilter langFileFilter;
+
     Language _lang;
     bool _dirty;
+    string _searchTerm = "";
 
-    FileFilter langFileFilter;
+    bool SearchFilter(TreeModel model, TreeIter iter)
+    {
+        if (_lang == null)
+        {
+            return true;
+        }
+        if (string.IsNullOrWhiteSpace(_searchTerm))
+        {
+            return true;
+        }
+        var id = (string) model.GetValue(iter, 1);
+        if (id == null)
+        {
+            return false;
+        }
+        Guid guid;
+        if (Guid.TryParse(id, out guid))
+        {
+            var word = _lang.Words.Where(x => x.Id == guid).FirstOrDefault();
+            if (word == null)
+            {
+                // Wha? Just show it.
+                return true;
+            }
+            if (word.Gloss.Contains(_searchTerm) || word.Lex.Contains(_searchTerm) || word.Definition.Contains(_searchTerm))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     void OpenLang(string filename)
     {
@@ -107,6 +156,10 @@ public partial class MainWindow: Gtk.Window
         }
         else
         {
+            if (string.IsNullOrWhiteSpace(_lang.Name))
+            {
+                _lang.Name = System.IO.Path.GetFileNameWithoutExtension(_lang.Filename);
+            }
             string json = JsonConvert.SerializeObject(_lang, Formatting.Indented);
             File.WriteAllText(_lang.Filename, json);
             _dirty = false;
@@ -172,7 +225,7 @@ public partial class MainWindow: Gtk.Window
         TreeIter iter;
         if (wordList.Selection.GetSelected(out iter))
         {
-            var guidStr = (string)wordStore.GetValue(iter, 1);
+            var guidStr = (string)wordListFilter.GetValue(iter, 1);
             var guid = Guid.Parse(guidStr);
             var word = _lang.Words.Where(x => x.Id == guid).FirstOrDefault();
             Console.WriteLine("found word {0}", word);
@@ -236,7 +289,7 @@ public partial class MainWindow: Gtk.Window
         var word = new Word();
         _lang.Words.Add(word);
         var iter = wordStore.Insert(0);
-        wordStore.SetValues(iter, "", word.Id);
+        wordStore.SetValues(iter, "", word.Id.ToString());
         currentWord.ShowWord(word);
         wordList.Selection.SelectIter(iter);
         SetDirty();
@@ -254,5 +307,27 @@ public partial class MainWindow: Gtk.Window
 
     protected void OnLanguagePropertiesActionActivated(object sender, EventArgs e)
     {
+        if (_lang != null)
+        {
+            var notesWindow = new LangNotesWindow();
+            notesWindow.ShowLang(_lang);
+            notesWindow.Dirty += NotesWindowDirty;
+        }
+    }
+
+    protected void OnButton2Activated(object sender, EventArgs e)
+    {
+        Search();
+    }
+
+    protected void OnSearchEntryActivated(object sender, EventArgs e)
+    {
+        Search();
+    }
+
+    void Search()
+    {
+        _searchTerm = searchEntry.Text;
+        wordListFilter.Refilter();
     }
 }

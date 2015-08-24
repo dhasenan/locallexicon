@@ -32,8 +32,8 @@ namespace LocalLexicon
             {
                 for (int i = 0; i < a.Lex.Length && i < b.Lex.Length; i++)
                 {
-                    var ia = AlphabetOrder.IndexOf(a.Lex[i]);
-                    var ib = AlphabetOrder.IndexOf(b.Lex[i]);
+                    var ia = AlphabetOrder.IndexOf(char.ToLower(a.Lex[i]));
+                    var ib = AlphabetOrder.IndexOf(char.ToLower(b.Lex[i]));
                     d = ia.CompareTo(ib);
                     if (d != 0)
                     {

@@ -51,7 +51,7 @@ namespace LocalLexicon
                 this.glossEntry.IsEditable = true;
                 this.lexEntry.Text = word.Lex;
                 this.lexEntry.IsEditable = true;
-                this.lexEntry.GrabFocus();
+                _lexOnEntry = word.Lex;
             }
             _word = word;
         }
@@ -105,7 +105,7 @@ namespace LocalLexicon
             if (_word.Lex != _lexOnEntry)
             {
                 FireWordChanged(true);
-            }
+            }_lexOnEntry = _word.Lex;
         }
 
         protected void OnLexEntryFocusInEvent(object o, Gtk.FocusInEventArgs args)

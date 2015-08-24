@@ -23,7 +23,13 @@ public partial class MainWindow
 	
 	private global::Gtk.MenuBar menubar1;
 	
-	private global::LocalLexicon.SearchWidget search;
+	private global::Gtk.HBox hbox3;
+	
+	private global::Gtk.Label label6;
+	
+	private global::Gtk.Entry searchEntry;
+	
+	private global::Gtk.Button button2;
 	
 	private global::Gtk.HPaned hpaned1;
 	
@@ -81,14 +87,45 @@ public partial class MainWindow
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.search = new global::LocalLexicon.SearchWidget ();
-		this.search.Events = ((global::Gdk.EventMask)(256));
-		this.search.Name = "search";
-		this.vbox1.Add (this.search);
-		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.search]));
-		w3.Position = 1;
+		this.hbox3 = new global::Gtk.HBox ();
+		this.hbox3.Name = "hbox3";
+		this.hbox3.Spacing = 6;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.label6 = new global::Gtk.Label ();
+		this.label6.Name = "label6";
+		this.label6.LabelProp = global::Mono.Unix.Catalog.GetString ("_Search");
+		this.label6.UseUnderline = true;
+		this.hbox3.Add (this.label6);
+		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.label6]));
+		w3.Position = 0;
 		w3.Expand = false;
 		w3.Fill = false;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.searchEntry = new global::Gtk.Entry ();
+		this.searchEntry.CanFocus = true;
+		this.searchEntry.Name = "searchEntry";
+		this.searchEntry.IsEditable = true;
+		this.searchEntry.InvisibleChar = '•';
+		this.hbox3.Add (this.searchEntry);
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.searchEntry]));
+		w4.Position = 1;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.button2 = new global::Gtk.Button ();
+		this.button2.CanFocus = true;
+		this.button2.Name = "button2";
+		this.button2.UseStock = true;
+		this.button2.UseUnderline = true;
+		this.button2.Label = "gtk-find";
+		this.hbox3.Add (this.button2);
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.button2]));
+		w5.Position = 2;
+		w5.Expand = false;
+		w5.Fill = false;
+		this.vbox1.Add (this.hbox3);
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox3]));
+		w6.Position = 1;
+		w6.Expand = false;
+		w6.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.hpaned1 = new global::Gtk.HPaned ();
 		this.hpaned1.CanFocus = true;
@@ -104,25 +141,25 @@ public partial class MainWindow
 		this.wordList.Name = "wordList";
 		this.GtkScrolledWindow1.Add (this.wordList);
 		this.hpaned1.Add (this.GtkScrolledWindow1);
-		global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow1]));
-		w5.Resize = false;
+		global::Gtk.Paned.PanedChild w8 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow1]));
+		w8.Resize = false;
 		// Container child hpaned1.Gtk.Paned+PanedChild
 		this.currentWord = new global::LocalLexicon.WordWidget ();
 		this.currentWord.Events = ((global::Gdk.EventMask)(256));
 		this.currentWord.Name = "currentWord";
 		this.hpaned1.Add (this.currentWord);
 		this.vbox1.Add (this.hpaned1);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hpaned1]));
-		w7.Position = 2;
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hpaned1]));
+		w10.Position = 2;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox1.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
-		w8.Position = 3;
-		w8.Expand = false;
-		w8.Fill = false;
+		global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
+		w11.Position = 3;
+		w11.Expand = false;
+		w11.Fill = false;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -137,6 +174,8 @@ public partial class MainWindow
 		this.NewWordAction.Activated += new global::System.EventHandler (this.OnNewWordActionActivated);
 		this.DeleteWordAction.Activated += new global::System.EventHandler (this.OnDeleteWordActionActivated);
 		this.LanguagePropertiesAction.Activated += new global::System.EventHandler (this.OnLanguagePropertiesActionActivated);
+		this.searchEntry.Activated += new global::System.EventHandler (this.OnSearchEntryActivated);
+		this.button2.Activated += new global::System.EventHandler (this.OnButton2Activated);
 		this.wordList.CursorChanged += new global::System.EventHandler (this.OnWordListCursorChanged);
 	}
 }

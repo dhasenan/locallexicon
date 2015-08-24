@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLexicon", "LocalLexico
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLexicon.Domain", "LocalLexicon.Domain\LocalLexicon.Domain.csproj", "{2D6E33D9-3B0C-43DA-9807-2C3678F66A06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLexicon.PolyglotImport", "LocalLexicon.PolyglotImport\LocalLexicon.PolyglotImport.csproj", "{591A126C-02D6-4DEB-9D8A-4114190650F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{2D6E33D9-3B0C-43DA-9807-2C3678F66A06}.Debug|x86.Build.0 = Debug|Any CPU
 		{2D6E33D9-3B0C-43DA-9807-2C3678F66A06}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D6E33D9-3B0C-43DA-9807-2C3678F66A06}.Release|x86.Build.0 = Release|Any CPU
+		{591A126C-02D6-4DEB-9D8A-4114190650F4}.Debug|x86.ActiveCfg = Debug|x86
+		{591A126C-02D6-4DEB-9D8A-4114190650F4}.Debug|x86.Build.0 = Debug|x86
+		{591A126C-02D6-4DEB-9D8A-4114190650F4}.Release|x86.ActiveCfg = Release|x86
+		{591A126C-02D6-4DEB-9D8A-4114190650F4}.Release|x86.Build.0 = Release|x86
 		{B8BCDD87-234D-4130-B357-E452FC7684B7}.Debug|x86.ActiveCfg = Debug|x86
 		{B8BCDD87-234D-4130-B357-E452FC7684B7}.Debug|x86.Build.0 = Debug|x86
 		{B8BCDD87-234D-4130-B357-E452FC7684B7}.Release|x86.ActiveCfg = Release|x86

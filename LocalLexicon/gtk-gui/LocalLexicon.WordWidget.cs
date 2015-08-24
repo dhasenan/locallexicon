@@ -53,6 +53,7 @@ namespace LocalLexicon
 			this.definitionText = new global::Gtk.TextView ();
 			this.definitionText.CanFocus = true;
 			this.definitionText.Name = "definitionText";
+			this.definitionText.WrapMode = ((global::Gtk.WrapMode)(2));
 			this.GtkScrolledWindow.Add (this.definitionText);
 			this.table1.Add (this.GtkScrolledWindow);
 			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.GtkScrolledWindow]));
